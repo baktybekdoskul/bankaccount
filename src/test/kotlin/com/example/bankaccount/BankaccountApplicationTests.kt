@@ -9,5 +9,4 @@ class BankaccountApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }
