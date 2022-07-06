@@ -33,6 +33,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
     implementation("org.springdoc:springdoc-openapi-data-rest:1.6.9")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
+    testImplementation("io.mockk:mockk:1.9.3")
 }
 
 tasks.withType<KotlinCompile> {
