@@ -17,8 +17,6 @@ repositories {
     mavenCentral()
 }
 
-extra["testcontainersVersion"] = "1.17.3"
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -28,16 +26,15 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:postgresql")
+    testRuntimeOnly("com.h2database:h2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.3")
+    implementation("io.github.microutils:kotlin-logging:1.5.9")
+    implementation("net.logstash.logback:logstash-logback-encoder:5.2")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
+    implementation("org.springdoc:springdoc-openapi-data-rest:1.6.9")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
 }
 
-dependencyManagement {
-    imports {
-        mavenBom("org.testcontainers:testcontainers-bom:${property("testcontainersVersion")}")
-    }
-}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
