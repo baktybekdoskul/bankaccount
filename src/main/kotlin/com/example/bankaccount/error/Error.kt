@@ -8,4 +8,5 @@ enum class Error(
 ) {
     UNKNOWN_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error"),
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "Required request body is missing"),
+    ACCOUNT_NOT_FOUND(HttpStatus.NOT_FOUND, "Account not found"),
 }

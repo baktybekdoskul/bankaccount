@@ -10,6 +10,6 @@ import javax.persistence.LockModeType
 @Repository
 interface AccountRepository : JpaRepository<AccountEntity, Long> {
     @Transactional
-    @Lock(value = LockModeType.PESSIMISTIC_WRITE) // Pessimistic read or write
+    @Lock(value = LockModeType.PESSIMISTIC_WRITE) // TODO Pessimistic read or write
     override fun findById(id: Long): Optional<AccountEntity>
 }
