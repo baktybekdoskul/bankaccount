@@ -1,7 +1,6 @@
 package com.example.bankaccount.domain.transfer
 
 import com.example.bankaccount.domain.account.AccountRepository
-import org.springframework.data.jpa.repository.Lock
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Isolation
 import org.springframework.transaction.annotation.Transactional
@@ -11,7 +10,7 @@ class TransferService(
     private val transferRepository: TransferRepository,
     private val accountRepository: AccountRepository
 ) {
-    @Transactional(rollbackFor = [Exception::class], isolation = Isolation.READ_COMMITTED)
+    @Transactional(rollbackFor = [Exception::class], isolation = Isolation.SERIALIZABLE)
     fun save(request: TransferRequest): TransferDto {
         val accountFrom = accountRepository.findById(request.accountFrom).get()
         val accountTo = accountRepository.findById(request.accountTo).get()
@@ -23,5 +22,4 @@ class TransferService(
         accountRepository.save(accountTo)
         return transferRepository.save(request.toEntity()).toDto()
     }
-    //
 }

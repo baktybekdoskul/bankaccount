@@ -8,17 +8,16 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
 import java.math.BigDecimal
 
-class TransferControllerTest: IntegrationTestSetup() {
+class TransferControllerTest : IntegrationTestSetup() {
     @BeforeEach
     fun setUp() {
         URL = "$BASE_URL:$port"
     }
 
     @Test
-    fun `addTransfer - should perform money transfer between accounts` () {
+    fun `addTransfer - should perform money transfer between accounts`() {
         val account1 = account(BigDecimal(1200.0))
         val account2 = account(BigDecimal(2000.0))
         val request = TransferRequest(
