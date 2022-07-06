@@ -15,3 +15,7 @@ spring:
     active: local
   swagger:
     host-url: "localhost-8080"
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

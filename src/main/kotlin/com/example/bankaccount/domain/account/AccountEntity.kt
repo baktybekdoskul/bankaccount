@@ -16,7 +16,7 @@ import javax.persistence.Table
 data class AccountEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long = 0,
     val balance: Double,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

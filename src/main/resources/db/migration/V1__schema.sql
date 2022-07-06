@@ -15,5 +15,5 @@ create table transfer(
     amount          decimal         not null,
     account_from    bigint          not null,
     account_to      bigint          not null,
-    created_time    timestamptz     not null
+    created_time    timestamp    not null
 );
