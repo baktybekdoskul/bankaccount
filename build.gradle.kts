@@ -35,7 +35,6 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
 }
 
-
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")

@@ -11,9 +11,9 @@ create table account(
 );
 
 create table transfer(
-    id              bigserial       primary key,
-    amount          decimal         not null,
-    account_from    bigint          not null,
-    account_to      bigint          not null,
-    created_time    timestamp    not null
+     id              bigserial       primary key,
+     amount          decimal         not null,
+     account_from    bigint          not null constraint transfer_from_account_id_fk references account,
+     account_to      bigint          not null constraint transfer_to_account_id_fk references account,
+     created_time    timestamp    not null
 );
