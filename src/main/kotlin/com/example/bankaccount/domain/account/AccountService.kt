@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional
 class AccountService(
     private val accountRepository: AccountRepository
 ) {
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     fun getAccountDetails(accountId: Long): AccountDto {
         return accountRepository.findById(accountId).get().toDto()
     }

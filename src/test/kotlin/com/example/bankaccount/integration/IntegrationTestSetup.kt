@@ -4,7 +4,6 @@ import com.example.bankaccount.domain.account.AccountEntity
 import com.example.bankaccount.domain.account.AccountRepository
 import com.example.bankaccount.domain.user.UserEntity
 import com.example.bankaccount.domain.user.UserRepository
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
