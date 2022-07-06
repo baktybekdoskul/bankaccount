@@ -1,5 +1,6 @@
 package com.example.bankaccount.domain.transfer
 
+import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -14,7 +15,7 @@ data class TransferEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
     // Pessimistic lock or parrallel access management security
-    val amount: Double,
+    val amount: BigDecimal,
     val accountFrom: Long,
     val accountTo: Long,
     val createdTime: LocalDateTime

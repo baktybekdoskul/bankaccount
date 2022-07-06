@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import java.math.BigDecimal
 
 class TransferControllerTest: IntegrationTestSetup() {
     @BeforeEach
@@ -18,12 +19,12 @@ class TransferControllerTest: IntegrationTestSetup() {
 
     @Test
     fun `addTransfer - should perform money transfer between accounts` () {
-        val account1 = account(1200.0)
-        val account2 = account(2000.0)
+        val account1 = account(BigDecimal(1200.0))
+        val account2 = account(BigDecimal(2000.0))
         val request = TransferRequest(
             accountFrom = account1.id,
             accountTo = account2.id,
-            amount = 300.0
+            amount = BigDecimal(300.0)
         )
         val objectMapper = jacksonObjectMapper()
         val response = restTemplate.postForEntity("$URL/transfer", request, String::class.java)
@@ -32,7 +33,7 @@ class TransferControllerTest: IntegrationTestSetup() {
         val account2Response = restTemplate.getForEntity("$URL/account/${account2.id}", String::class.java)
         val account1Res = objectMapper.readValue<AccountDto>(account1Response.body.toString())
         val account2Res = objectMapper.readValue<AccountDto>(account2Response.body.toString())
-        Assertions.assertEquals(300.0, transferRes.amount)
+        Assertions.assertEquals(BigDecimal(300.0), transferRes.amount)
         Assertions.assertEquals(account1Res.balance, account1.balance - transferRes.amount)
         Assertions.assertEquals(account2Res.balance, account2.balance + transferRes.amount)
     }

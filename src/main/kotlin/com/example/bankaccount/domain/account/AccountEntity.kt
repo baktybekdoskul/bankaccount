@@ -2,6 +2,7 @@ package com.example.bankaccount.domain.account
 
 import com.example.bankaccount.domain.user.UserEntity
 import com.example.bankaccount.domain.user.toDto
+import java.math.BigDecimal
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
@@ -17,7 +18,7 @@ data class AccountEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
-    var balance: Double,
+    var balance: BigDecimal,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     val user: UserEntity
