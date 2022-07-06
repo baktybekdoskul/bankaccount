@@ -8,6 +8,8 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.springframework.web.client.HttpServerErrorException
 import java.math.BigDecimal
 
 class TransferControllerTest : IntegrationTestSetup() {
@@ -35,5 +37,17 @@ class TransferControllerTest : IntegrationTestSetup() {
         Assertions.assertEquals(BigDecimal(300.0), transferRes.amount)
         Assertions.assertEquals(account1Res.balance, account1.balance - transferRes.amount)
         Assertions.assertEquals(account2Res.balance, account2.balance + transferRes.amount)
+    }
+
+    @Test
+    fun `addTransfer - should throw exception on wrong params`() {
+        val account1 = account(BigDecimal(1200.0))
+        val account2 = account(BigDecimal(2000.0))
+        val request = TransferRequest(
+            accountFrom = account1.id + 3,
+            accountTo = account2.id,
+            amount = BigDecimal(300.0)
+        )
+        assertThrows<HttpServerErrorException.InternalServerError> { restTemplate.postForEntity("$URL/transfer", request, String::class.java) }
     }
 }
