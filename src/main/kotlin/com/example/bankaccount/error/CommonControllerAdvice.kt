@@ -2,6 +2,7 @@ package com.example.bankaccount.error
 
 import mu.KotlinLogging
 import net.logstash.logback.argument.StructuredArguments.keyValue
+import org.apache.commons.lang3.exception.ExceptionUtils
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 import org.springframework.http.ResponseEntity
@@ -37,7 +38,8 @@ class CommonControllerAdvice {
             id = id,
             status = Error.BAD_REQUEST.httpStatus,
             error = Error.BAD_REQUEST.text,
-            code = Error.BAD_REQUEST
+            code = Error.BAD_REQUEST,
+            detail = getDetail(exception)
         )
         return ResponseEntity(error, error.status)
     }
@@ -49,7 +51,8 @@ class CommonControllerAdvice {
             id = id,
             status = Error.BAD_REQUEST.httpStatus,
             error = "invalid.request",
-            code = Error.BAD_REQUEST
+            code = Error.BAD_REQUEST,
+            detail = getDetail(exception)
         )
         return ResponseEntity(error, error.status)
     }
@@ -61,7 +64,8 @@ class CommonControllerAdvice {
             id = id,
             status = Error.UNKNOWN_ERROR.httpStatus,
             error = Error.UNKNOWN_ERROR.text,
-            code = Error.UNKNOWN_ERROR
+            code = Error.UNKNOWN_ERROR,
+            detail = getDetail(exception)
         )
         return ResponseEntity(error, error.status)
     }
@@ -74,4 +78,7 @@ class CommonControllerAdvice {
         if (isWarn) logger.warn(ex.message, keyValue("id", id.toString()), keyValue("code", errorName), ex)
         else logger.error(ex.message, keyValue("id", id.toString()), keyValue("code", errorName), ex)
     }
+
+    private fun getDetail(ex: Exception) = "Error: ${ex.message}\n" +
+        "StackTrace: ${ExceptionUtils.getStackTrace(ex)}"
 }

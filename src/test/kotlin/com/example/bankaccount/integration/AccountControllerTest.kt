@@ -6,6 +6,8 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.springframework.web.client.HttpServerErrorException.InternalServerError
 import java.math.BigDecimal
 
 class AccountControllerTest : IntegrationTestSetup() {
@@ -21,5 +23,12 @@ class AccountControllerTest : IntegrationTestSetup() {
         Assertions.assertEquals(account.id, result.id)
         Assertions.assertEquals(account.balance, result.balance)
         Assertions.assertEquals(account.user.surname, result.user.surname)
+    }
+
+    @Test
+    fun `getAccountById - should throw exception on wrong id`() {
+        assertThrows<InternalServerError> {
+            restTemplate.getForEntity("$URL/1", String::class.java)
+        }
     }
 }

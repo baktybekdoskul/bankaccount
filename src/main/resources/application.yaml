@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/bank_db
+    url: jdbc:postgresql://localhost:5432/bank_db
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
@@ -15,7 +15,3 @@ spring:
     active: local
   swagger:
     host-url: "localhost-8080"
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher

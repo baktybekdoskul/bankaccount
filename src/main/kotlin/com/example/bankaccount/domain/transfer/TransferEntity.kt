@@ -14,7 +14,6 @@ data class TransferEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
-    // Pessimistic lock or parrallel access management security
     val amount: BigDecimal,
     val accountFrom: Long,
     val accountTo: Long,
