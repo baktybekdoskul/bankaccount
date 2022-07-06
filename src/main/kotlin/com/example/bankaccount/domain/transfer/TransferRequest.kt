@@ -1,9 +1,10 @@
 package com.example.bankaccount.domain.transfer
 
+import java.math.BigDecimal
 import java.time.LocalDateTime
 
 data class TransferRequest(
-    val amount: Double,
+    val amount: BigDecimal,
     val accountFrom: Long,
     val accountTo: Long
 ) {

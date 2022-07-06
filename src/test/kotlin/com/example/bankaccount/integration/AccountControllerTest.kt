@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 
 class AccountControllerTest : IntegrationTestSetup() {
     @BeforeEach
@@ -14,7 +15,7 @@ class AccountControllerTest : IntegrationTestSetup() {
     }
     @Test
     fun `getAccountById - should return account by its ID`() {
-        val account = account(9879.0)
+        val account = account(BigDecimal(3000))
         val response = restTemplate.getForEntity("$URL/${account.id}", String::class.java)
         val result = jacksonObjectMapper().readValue<AccountDto>(response.body.toString())
         Assertions.assertEquals(account.id, result.id)

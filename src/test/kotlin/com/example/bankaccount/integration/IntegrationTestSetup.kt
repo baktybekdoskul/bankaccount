@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.web.client.RestTemplate
+import java.math.BigDecimal
 import java.util.concurrent.atomic.AtomicLong
 
 @ExtendWith(SpringExtension::class)
@@ -33,7 +34,7 @@ class IntegrationTestSetup {
     protected val idSequence = AtomicLong(0)
     protected fun uniqueNumber() = idSequence.incrementAndGet()
 
-    protected fun account(balance: Double) = AccountEntity(
+    protected fun account(balance: BigDecimal) = AccountEntity(
         user = user(),
         balance = balance
     ).let { accountRepository.save(it) }
